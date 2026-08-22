@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, CreditCard, DollarSign, CheckCircle2, QrCode, ArrowRight, ShieldCheck, Sparkles, User, Mail, PlusCircle, LayoutDashboard } from 'lucide-react';
@@ -22,10 +22,31 @@ const CheckoutModal = ({ isOpen, onClose, onCheckoutSuccess }) => {
   const [isProcessing, setIsProcessing] = useState(false);
   const [receipt, setReceipt] = useState(null);
 
+  useEffect(() => {
+    if (user) {
+      if (user.name) setGuestName(user.name);
+      if (user.email) setGuestEmail(user.email);
+    }
+  }, [user]);
+
   if (!isOpen) return null;
 
   const handleCompleteOrder = async (e) => {
     e.preventDefault();
+
+    if (!user) {
+      onClose();
+      if (setIsCartOpen) setIsCartOpen(false);
+      navigate('/login', {
+        state: {
+          from: '/menu',
+          openCart: true,
+          message: 'Please sign in or create an account to complete your order.',
+        },
+      });
+      return;
+    }
+
     setIsProcessing(true);
 
     const customerEmail = user?.email || guestEmail || 'guest@domain.com';

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Trash2, Plus, Minus, ArrowRight, ShoppingBag, Check } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useUserAuth } from '../../context/UserAuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import CheckoutModal from './CheckoutModal';
 
 const CartDrawer = () => {
@@ -19,7 +19,24 @@ const CartDrawer = () => {
   } = useCart();
 
   const { user } = useUserAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
+
+  const handleProceedToCheckout = () => {
+    if (user) {
+      setIsCheckoutModalOpen(true);
+    } else {
+      setIsCartOpen(false);
+      navigate('/login', {
+        state: {
+          from: location.pathname || '/menu',
+          openCart: true,
+          message: 'Please sign in or create an account to complete your order.',
+        },
+      });
+    }
+  };
 
   return (
     <>
@@ -162,7 +179,7 @@ const CartDrawer = () => {
 
                     <div className="flex flex-col gap-2">
                       <button
-                        onClick={() => setIsCheckoutModalOpen(true)}
+                        onClick={handleProceedToCheckout}
                         className="w-full py-4 bg-caveno-gold text-caveno-black font-sans text-xs uppercase tracking-widest font-semibold rounded-full flex items-center justify-center gap-2 hover:bg-caveno-amber transition duration-300 shadow-xl shadow-caveno-gold/20"
                       >
                         <span>Proceed to Luxury Checkout</span>

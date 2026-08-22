@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Sparkles, Mail, Lock, ArrowRight, ArrowLeft, ShieldCheck } from 'lucide-react';
+import { Sparkles, Mail, Lock, ArrowRight, ArrowLeft, ShieldCheck, Info } from 'lucide-react';
 import { useUserAuth } from '../context/UserAuthContext';
+import { useCart } from '../context/CartContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -10,7 +11,11 @@ const Login = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useUserAuth();
+  const { setIsCartOpen } = useCart();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const redirectMessage = location.state?.message;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +24,10 @@ const Login = () => {
     try {
       const res = await login(email, password);
       if (res.success) {
-        navigate('/dashboard');
+        if (location.state?.openCart) {
+          setIsCartOpen(true);
+        }
+        navigate(location.state?.from || '/dashboard');
       } else {
         setError(res.message || 'Invalid credentials. Please try again.');
       }
@@ -87,6 +95,14 @@ const Login = () => {
             Enter your email & password to access live reservations, order history, and exclusive member perks.
           </p>
         </div>
+
+        {/* Redirect Info Banner */}
+        {redirectMessage && (
+          <div className="p-3.5 rounded-xl bg-caveno-gold/15 border border-caveno-gold/40 text-caveno-gold text-xs font-sans flex items-center gap-2.5 shadow-lg">
+            <Info size={16} className="shrink-0 text-caveno-gold" />
+            <span>{redirectMessage}</span>
+          </div>
+        )}
 
         {/* Error Alert */}
         {error && (
