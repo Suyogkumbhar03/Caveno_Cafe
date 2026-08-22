@@ -5,7 +5,7 @@ const getApiBaseUrl = () => {
   }
   // Production fallback vs local development fallback
   if (import.meta.env.PROD) {
-    return 'https://caveno-backend.onrender.com/api';
+    return 'https://caveno-cafe.onrender.com/api';
   }
   return 'http://localhost:5000/api';
 };
