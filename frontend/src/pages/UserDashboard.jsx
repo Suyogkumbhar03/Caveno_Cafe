@@ -49,10 +49,15 @@ const UserDashboard = () => {
       }
     };
 
-    if (userToken) fetchUserData();
+    if (userToken) {
+      fetchUserData();
+      const interval = setInterval(fetchUserData, 5000);
+      return () => clearInterval(interval);
+    }
   }, [userToken]);
 
   const activeBooking = reservations[0];
+  const pastOrders = orders.filter((o) => ['Served', 'Completed', 'Cancelled'].includes(o.orderStatus));
 
   return (
     <div className="min-h-screen bg-caveno-black text-caveno-cream pt-32 pb-32 px-6 md:px-16 relative overflow-hidden">
@@ -100,7 +105,7 @@ const UserDashboard = () => {
 
         {/* Active Upcoming Booking Showcase */}
         <div className="space-y-4">
-          <h2 className="font-cinzel text-2xl text-caveno-cream font-medium">Active Reservation Pass</h2>
+          <h2 className="font-cinzel text-2xl text-caveno-cream font-medium">Your Table Booking</h2>
 
           {activeBooking ? (
             <motion.div
@@ -143,33 +148,33 @@ const UserDashboard = () => {
                 className="px-6 py-3.5 rounded-full bg-caveno-gold text-caveno-black font-sans text-xs uppercase tracking-widest font-semibold flex items-center gap-2.5 hover:bg-caveno-amber transition shadow-xl shadow-caveno-gold/20 shrink-0"
               >
                 <QrCode size={16} />
-                <span>View Digital Pass</span>
+                <span>View Booking Pass</span>
               </button>
             </motion.div>
           ) : (
             <div className="glass-card p-8 rounded-3xl border border-white/10 text-center space-y-4 py-12">
               <Calendar size={32} className="mx-auto text-caveno-gold/40" />
-              <p className="font-cinzel text-lg text-caveno-cream">No upcoming cupping reservations</p>
+              <p className="font-cinzel text-lg text-caveno-cream">No upcoming table bookings</p>
               <p className="font-sans text-xs text-caveno-muted max-w-sm mx-auto font-light">
-                Reserve your 90-minute private tasting flight in our Roastery Terrace or Velvet Lounge.
+                Reserve your table for an unhurried, comfortable dining experience.
               </p>
               <Link
                 to="/reservation"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-caveno-gold text-caveno-black text-xs uppercase tracking-wider font-semibold hover:bg-caveno-amber transition"
               >
-                <span>Reserve Flight</span>
+                <span>Reserve Table</span>
                 <ArrowRight size={14} />
               </Link>
             </div>
           )}
         </div>
 
-        {/* Past Tasting Order History */}
+        {/* Past Order History */}
         <div className="space-y-4">
-          <h2 className="font-cinzel text-2xl text-caveno-cream font-medium">Tasting Order History</h2>
+          <h2 className="font-cinzel text-2xl text-caveno-cream font-medium">Past Orders</h2>
 
           <div className="glass-card p-6 rounded-3xl border border-white/10 overflow-x-auto">
-            {orders.length === 0 ? (
+            {pastOrders.length === 0 ? (
               <p className="text-xs font-sans text-caveno-muted text-center py-8">
                 No past orders recorded under this account.
               </p>
@@ -178,14 +183,14 @@ const UserDashboard = () => {
                 <thead className="font-mono text-[11px] text-caveno-muted uppercase border-b border-white/10">
                   <tr>
                     <th className="py-3 px-4">Date</th>
-                    <th className="py-3 px-4">Selected Roasts & Pastries</th>
+                    <th className="py-3 px-4">Selected Items</th>
                     <th className="py-3 px-4">Table / Zone</th>
                     <th className="py-3 px-4">Total</th>
                     <th className="py-3 px-4">Status</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-white/5">
-                  {orders.map((ord) => (
+                  {pastOrders.map((ord) => (
                     <tr key={ord._id} className="hover:bg-white/[0.02]">
                       <td className="py-4 px-4 font-mono text-caveno-muted">
                         {new Date(ord.createdAt).toLocaleDateString()}

@@ -50,11 +50,40 @@ const LiveOrderTracker = () => {
     );
   }
 
-  // Filter active orders (Pending, Preparing, Ready) or display all recent orders if none are active
-  const activeOrders = orders.filter((o) => o.orderStatus !== 'Served' && o.orderStatus !== 'Cancelled');
-  const displayOrders = activeOrders.length > 0 ? activeOrders : orders.slice(0, 2);
+  // Filter active orders strictly (Pending, Preparing, Ready)
+  const activeOrders = orders.filter((o) => ['Pending', 'Preparing', 'Ready'].includes(o.orderStatus));
 
-  if (displayOrders.length === 0) return null;
+  if (activeOrders.length === 0) {
+    return (
+      <div className="space-y-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="w-2.5 h-2.5 rounded-full bg-caveno-gold/40" />
+            <h2 className="font-cinzel text-2xl text-caveno-cream font-medium">
+              Current Live Orders (0)
+            </h2>
+          </div>
+        </div>
+
+        <div className="glass-card border border-white/10 rounded-3xl p-8 text-center space-y-4 py-10">
+          <ShoppingBag size={32} className="mx-auto text-caveno-gold/50" />
+          <div className="space-y-1">
+            <p className="font-cinzel text-lg text-caveno-cream">No active orders right now</p>
+            <p className="font-sans text-xs text-caveno-muted font-light">
+              Ready for something fresh? Explore our specialty coffees and fresh bakery selections.
+            </p>
+          </div>
+          <a
+            href="/menu"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-caveno-gold text-caveno-black font-sans text-xs uppercase tracking-wider font-semibold hover:bg-caveno-amber transition shadow-lg shadow-caveno-gold/20"
+          >
+            <span>Browse Menu</span>
+            <ChevronRight size={14} />
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   const getStepIndex = (status) => {
     switch (status) {
@@ -76,7 +105,7 @@ const LiveOrderTracker = () => {
         <div className="flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
           <h2 className="font-cinzel text-2xl text-caveno-cream font-medium">
-            Active Tasting Orders ({displayOrders.length})
+            Current Live Orders ({activeOrders.length})
           </h2>
         </div>
 
@@ -88,7 +117,7 @@ const LiveOrderTracker = () => {
 
       {/* Grid of Multi-Active Orders */}
       <div className="grid grid-cols-1 gap-6">
-        {displayOrders.map((order) => {
+        {activeOrders.map((order) => {
           const currentStep = getStepIndex(order.orderStatus);
           const orderShortId = order._id ? order._id.slice(-6).toUpperCase() : 'ORD-8921';
 
