@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAdminAuth } from '../../context/AdminAuthContext';
-import { Lock, Mail, Sparkles, ArrowRight, AlertCircle } from 'lucide-react';
+import { Lock, Mail, Sparkles, ArrowRight, AlertCircle, ArrowLeft, Shield } from 'lucide-react';
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
@@ -23,20 +23,50 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-caveno-black text-caveno-cream flex items-center justify-center px-6 relative overflow-hidden">
-      {/* Background Ambient Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-caveno-gold/10 rounded-full blur-[180px] pointer-events-none" />
+    <div className="min-h-screen bg-caveno-black text-caveno-cream flex items-center justify-center px-6 relative overflow-hidden font-sans">
+      {/* Ambient Floating Golden Light Mesh */}
+      <motion.div
+        animate={{
+          scale: [1, 1.15, 1],
+          x: [-15, 15, -15],
+          y: [-10, 10, -10],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-caveno-gold/10 rounded-full blur-[190px] pointer-events-none"
+      />
+
+      {/* Steam / Dark Blurred Coffee Aesthetic Overlay */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-caveno-gold/5 via-transparent to-caveno-black/90 pointer-events-none" />
 
       {/* Login Card */}
       <motion.div
-        initial={{ opacity: 0, y: 25 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-md glass-card p-8 sm:p-10 rounded-3xl border border-caveno-gold/30 shadow-2xl relative z-10 space-y-8"
+        initial={{ opacity: 0, scale: 0.95, filter: 'blur(10px)' }}
+        animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="w-full max-w-md glass-card p-8 sm:p-10 rounded-3xl border border-caveno-gold/30 shadow-2xl relative z-10 space-y-8 backdrop-blur-xl"
       >
+        {/* Top Navigation: Return to CAVÉNO */}
+        <div className="flex items-center justify-between">
+          <Link
+            to="/"
+            className="group inline-flex items-center gap-2 px-4 py-2 rounded-full glass-pill border border-white/10 text-xs font-sans text-caveno-muted hover:text-caveno-gold hover:border-caveno-gold/40 transition-all duration-300"
+          >
+            <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform duration-300 text-caveno-gold" />
+            <span>Return to CAVÉNO</span>
+          </Link>
+
+          <span className="font-mono text-[10px] text-caveno-gold/80 uppercase tracking-widest flex items-center gap-1">
+            <Shield size={13} /> ATELIER
+          </span>
+        </div>
+
         {/* Header Branding */}
-        <div className="text-center space-y-3">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full glass-pill border border-caveno-gold/40 text-caveno-gold mb-2">
+        <div className="text-center space-y-2.5">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded-full glass-pill border border-caveno-gold/40 text-caveno-gold mb-1">
             <Sparkles size={20} />
           </div>
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-caveno-gold block font-light">
@@ -45,7 +75,7 @@ const AdminLogin = () => {
           <h1 className="font-cinzel text-3xl text-caveno-cream font-medium tracking-wider uppercase">
             ADMIN LOGIN
           </h1>
-          <p className="font-sans text-xs text-caveno-muted font-light">
+          <p className="font-sans text-xs text-caveno-muted font-light leading-relaxed">
             Sign in with authorized administrator credentials to access real-time seating & order telemetry.
           </p>
         </div>
@@ -69,7 +99,7 @@ const AdminLogin = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3 font-sans text-xs text-caveno-cream focus:outline-none focus:border-caveno-gold/60 transition"
+                className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3 font-sans text-xs text-caveno-cream placeholder-caveno-muted/40 focus:outline-none focus:ring-1 focus:ring-caveno-gold/50 focus:border-caveno-gold focus:bg-white/[0.08] transition duration-300"
                 placeholder="admin@caveno.com"
               />
             </div>
@@ -84,7 +114,7 @@ const AdminLogin = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3 font-sans text-xs text-caveno-cream focus:outline-none focus:border-caveno-gold/60 transition"
+                className="w-full bg-white/5 border border-white/10 rounded-xl pl-11 pr-4 py-3 font-sans text-xs text-caveno-cream placeholder-caveno-muted/40 focus:outline-none focus:ring-1 focus:ring-caveno-gold/50 focus:border-caveno-gold focus:bg-white/[0.08] transition duration-300"
                 placeholder="••••••••••••"
               />
             </div>
@@ -93,10 +123,10 @@ const AdminLogin = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-4 bg-caveno-gold text-caveno-black font-sans text-xs uppercase tracking-widest font-semibold rounded-full flex items-center justify-center gap-2 hover:bg-caveno-amber transition duration-300 shadow-xl shadow-caveno-gold/20 mt-2"
+            className="w-full py-4 bg-caveno-gold text-caveno-black font-sans text-xs uppercase tracking-widest font-semibold rounded-full flex items-center justify-center gap-2 hover:bg-caveno-amber transition duration-300 shadow-xl shadow-caveno-gold/20 mt-3 group"
           >
             <span>{loading ? 'Authenticating...' : 'ADMIN LOGIN'}</span>
-            <ArrowRight size={16} />
+            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </button>
         </form>
       </motion.div>
