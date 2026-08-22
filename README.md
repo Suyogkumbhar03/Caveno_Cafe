@@ -89,9 +89,9 @@ Create a `.env` file inside the `backend/` directory:
 
 ```env
 PORT=5000
-MONGODB_URI=mongodb+srv://suyogkumbhar087_db_user:root@cluster0.wsey7bc.mongodb.net/caveno_db?retryWrites=true&w=majority&appName=Cluster0
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/caveno_db?retryWrites=true&w=majority
 CLIENT_URL=http://localhost:5173
-JWT_SECRET=caveno_super_secret_jwt_key_2026_luxury_roastery
+JWT_SECRET=your_jwt_secret_key_here
 ```
 
 ### 4. Running the Application Locally
