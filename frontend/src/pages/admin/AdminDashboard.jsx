@@ -528,8 +528,8 @@ const AdminDashboard = () => {
             {/* 3-Column Kanban Board */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               {/* Column 1: Incoming / Pending */}
-              <div className="glass-card p-6 rounded-3xl border border-amber-500/40 space-y-4 shadow-xl">
-                <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <div className="glass-card p-6 rounded-3xl border border-amber-500/40 shadow-xl flex flex-col h-[680px] max-h-[680px] relative overflow-hidden">
+                <div className="flex items-center justify-between border-b border-white/10 pb-3.5 shrink-0 bg-caveno-black/40 backdrop-blur-md z-10">
                   <div className="flex items-center gap-2">
                     <Clock size={18} className="text-amber-400" />
                     <h4 className="font-cinzel text-base text-caveno-cream font-medium">
@@ -541,9 +541,9 @@ const AdminDashboard = () => {
                   </span>
                 </div>
 
-                <div className="space-y-4 max-h-[600px] overflow-y-auto pr-1">
+                <div className="flex-1 overflow-y-auto pr-1.5 space-y-3.5 mt-4 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-caveno-gold/20 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-caveno-gold/40">
                   {orders.filter(o => o.orderStatus === 'Pending').length === 0 ? (
-                    <p className="text-xs text-caveno-muted font-light py-12 text-center">
+                    <p className="text-xs text-caveno-muted font-light py-16 text-center">
                       No incoming pending orders.
                     </p>
                   ) : (
@@ -552,7 +552,7 @@ const AdminDashboard = () => {
                       .map((ord) => (
                         <div
                           key={ord._id}
-                          className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3 hover:border-amber-500/40 transition"
+                          className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3 hover:border-amber-500/40 transition shrink-0"
                         >
                           <div className="flex items-center justify-between font-mono text-xs">
                             <span className="text-caveno-gold font-semibold">
@@ -605,8 +605,8 @@ const AdminDashboard = () => {
               </div>
 
               {/* Column 2: Brewing / Kitchen (Preparing) */}
-              <div className="glass-card p-6 rounded-3xl border border-blue-500/40 space-y-4 shadow-xl">
-                <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <div className="glass-card p-6 rounded-3xl border border-blue-500/40 shadow-xl flex flex-col h-[680px] max-h-[680px] relative overflow-hidden">
+                <div className="flex items-center justify-between border-b border-white/10 pb-3.5 shrink-0 bg-caveno-black/40 backdrop-blur-md z-10">
                   <div className="flex items-center gap-2">
                     <Flame size={18} className="text-blue-400 animate-pulse" />
                     <h4 className="font-cinzel text-base text-caveno-cream font-medium">
@@ -618,9 +618,9 @@ const AdminDashboard = () => {
                   </span>
                 </div>
 
-                <div className="space-y-4 max-h-[600px] overflow-y-auto pr-1">
+                <div className="flex-1 overflow-y-auto pr-1.5 space-y-3.5 mt-4 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-caveno-gold/20 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-caveno-gold/40">
                   {orders.filter(o => o.orderStatus === 'Preparing' || o.orderStatus === 'Ready').length === 0 ? (
-                    <p className="text-xs text-caveno-muted font-light py-12 text-center">
+                    <p className="text-xs text-caveno-muted font-light py-16 text-center">
                       No orders currently being brewed.
                     </p>
                   ) : (
@@ -629,7 +629,7 @@ const AdminDashboard = () => {
                       .map((ord) => (
                         <div
                           key={ord._id}
-                          className="p-4 rounded-2xl bg-white/5 border border-blue-500/20 space-y-3"
+                          className="p-4 rounded-2xl bg-white/5 border border-blue-500/20 space-y-3 shrink-0"
                         >
                           <div className="flex items-center justify-between font-mono text-xs">
                             <span className="text-blue-300 font-semibold">
@@ -675,8 +675,8 @@ const AdminDashboard = () => {
               </div>
 
               {/* Column 3: Served & Completed */}
-              <div className="glass-card p-6 rounded-3xl border border-emerald-500/40 space-y-4 shadow-xl">
-                <div className="flex items-center justify-between border-b border-white/10 pb-3">
+              <div className="glass-card p-6 rounded-3xl border border-emerald-500/40 shadow-xl flex flex-col h-[680px] max-h-[680px] relative overflow-hidden">
+                <div className="flex items-center justify-between border-b border-white/10 pb-3.5 shrink-0 bg-caveno-black/40 backdrop-blur-md z-10">
                   <div className="flex items-center gap-2">
                     <CheckCircle size={18} className="text-emerald-400" />
                     <h4 className="font-cinzel text-base text-caveno-cream font-medium">
@@ -688,9 +688,9 @@ const AdminDashboard = () => {
                   </span>
                 </div>
 
-                <div className="space-y-4 max-h-[600px] overflow-y-auto pr-1">
+                <div className="flex-1 overflow-y-auto pr-1.5 space-y-3.5 mt-4 [&::-webkit-scrollbar]:w-1.5 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-caveno-gold/20 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-caveno-gold/40">
                   {orders.filter(o => o.orderStatus === 'Served').length === 0 ? (
-                    <p className="text-xs text-caveno-muted font-light py-12 text-center">
+                    <p className="text-xs text-caveno-muted font-light py-16 text-center">
                       No completed served orders yet.
                     </p>
                   ) : (
@@ -699,7 +699,7 @@ const AdminDashboard = () => {
                       .map((ord) => (
                         <div
                           key={ord._id}
-                          className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2 opacity-85"
+                          className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2 opacity-85 shrink-0"
                         >
                           <div className="flex items-center justify-between font-mono text-xs text-emerald-400">
                             <span>#{ord._id.slice(-6).toUpperCase()}</span>
