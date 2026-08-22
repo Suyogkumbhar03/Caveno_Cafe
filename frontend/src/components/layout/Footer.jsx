@@ -1,29 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Compass, Clock, ShieldCheck } from 'lucide-react';
+import { Compass, ShieldCheck } from 'lucide-react';
 
 const Footer = () => {
-  const [timeString, setTimeString] = useState('');
-
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      setTimeString(
-        now.toLocaleTimeString('en-US', {
-          timeZone: 'Asia/Kolkata',
-          hour12: false,
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit',
-        })
-      );
-    };
-
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <footer className="relative bg-caveno-black text-caveno-cream border-t border-white/[0.08] pt-20 pb-12 px-6 md:px-24 overflow-hidden select-none">
       {/* Subtle Background Glow */}
@@ -32,7 +11,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto space-y-16">
         {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
-          {/* Brand & Live Clock Column */}
+          {/* Brand Column */}
           <div className="md:col-span-5 space-y-6">
             <Link to="/" className="font-cinzel text-3xl tracking-[0.25em] text-caveno-cream font-bold block">
               CAVÉNO
@@ -41,15 +20,6 @@ const Footer = () => {
             <p className="font-sans text-xs text-caveno-muted font-light leading-relaxed max-w-sm">
               An ultra-premium roastery & tasting room dedicated to shade-grown micro-lots and editorial luxury experiences.
             </p>
-
-            {/* Live Clock & Coordinates Status Badge */}
-            <div className="inline-flex items-center gap-4 glass-card px-4 py-2.5 rounded-full border border-white/10 text-xs font-mono">
-              <div className="flex items-center gap-2 text-caveno-gold">
-                <Clock size={13} className="animate-spin-slow" />
-                <span>KOLHAPUR / IST {timeString || 'LIVE'}</span>
-              </div>
-              <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-ping" />
-            </div>
           </div>
 
           {/* Quick Links Column */}
@@ -89,9 +59,9 @@ const Footer = () => {
             <div className="space-y-2 font-sans text-xs text-caveno-muted font-light leading-relaxed">
               <p className="flex items-center gap-2">
                 <Compass size={14} className="text-caveno-gold shrink-0" />
-                <span>16.7050° N, 74.2433° E • Sanctuary Avenue</span>
+                <span>Sanctuary Avenue • Master Tasting Salon</span>
               </p>
-              <p>Daily Tastings: 08:00 — 22:00 IST</p>
+              <p>Daily Tastings: 08:00 — 22:00</p>
               <p className="pt-2 text-caveno-cream font-mono text-[11px]">
                 reservations@caveno-luxury.com
               </p>
