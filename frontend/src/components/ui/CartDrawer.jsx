@@ -24,18 +24,18 @@ const CartDrawer = () => {
   const [isCheckoutModalOpen, setIsCheckoutModalOpen] = useState(false);
 
   const handleProceedToCheckout = () => {
-    if (user) {
-      setIsCheckoutModalOpen(true);
-    } else {
+    if (!user) {
       setIsCartOpen(false);
       navigate('/login', {
         state: {
           from: location.pathname || '/menu',
           openCart: true,
-          message: 'Please sign in or create an account to complete your order.',
+          message: 'Please sign in to complete your tasting order.',
         },
       });
+      return;
     }
+    setIsCheckoutModalOpen(true);
   };
 
   return (

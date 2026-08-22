@@ -10,11 +10,17 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useUserAuth();
-  const { setIsCartOpen } = useCart();
+
+  const authContext = useUserAuth() || {};
+  const login = authContext.login;
+
+  const cartContext = useCart() || {};
+  const setIsCartOpen = cartContext.setIsCartOpen;
+
   const navigate = useNavigate();
   const location = useLocation();
 
+  const from = location.state?.from?.pathname || location.state?.from || location.state?.redirectTo || '/dashboard';
   const redirectMessage = location.state?.message;
 
   const handleSubmit = async (e) => {
@@ -22,14 +28,18 @@ const Login = () => {
     setError('');
     setLoading(true);
     try {
+      if (!login) {
+        setError('Authentication service unavailable.');
+        return;
+      }
       const res = await login(email, password);
-      if (res.success) {
-        if (location.state?.openCart) {
+      if (res && res.success) {
+        if (location.state?.openCart && setIsCartOpen) {
           setIsCartOpen(true);
         }
-        navigate(location.state?.from || '/dashboard');
+        navigate(from);
       } else {
-        setError(res.message || 'Invalid credentials. Please try again.');
+        setError(res?.message || 'Invalid credentials. Please try again.');
       }
     } catch (err) {
       setError('An unexpected authentication error occurred.');
@@ -39,7 +49,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-caveno-black text-caveno-cream flex items-center justify-center px-6 relative overflow-hidden font-sans">
+    <div className="min-h-screen w-full bg-caveno-black text-caveno-cream flex items-center justify-center px-6 relative overflow-hidden z-10 font-sans">
       {/* Ambient Floating Golden Light Mesh */}
       <motion.div
         animate={{

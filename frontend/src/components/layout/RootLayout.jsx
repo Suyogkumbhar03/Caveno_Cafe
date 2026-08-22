@@ -66,11 +66,7 @@ const LayoutContent = () => {
 };
 
 const RootLayout = () => {
-  return (
-    <CartProvider>
-      <LayoutContent />
-    </CartProvider>
-  );
+  return <LayoutContent />;
 };
 
 export default RootLayout;

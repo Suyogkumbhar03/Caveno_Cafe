@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound';
 
 import { AdminAuthProvider } from './context/AdminAuthContext';
 import { UserAuthProvider } from './context/UserAuthContext';
+import { CartProvider } from './context/CartContext';
 import AdminRoute from './components/auth/AdminRoute';
 import UserRoute from './components/auth/UserRoute';
 import AdminLogin from './pages/admin/AdminLogin';
@@ -19,7 +20,8 @@ function App() {
   return (
     <UserAuthProvider>
       <AdminAuthProvider>
-        <Router>
+        <CartProvider>
+          <Router>
           <Routes>
             {/* Admin Login & Protected Subsystem */}
             <Route path="/admin/login" element={<AdminLogin />} />
@@ -49,7 +51,8 @@ function App() {
             </Route>
           </Routes>
         </Router>
-      </AdminAuthProvider>
+      </CartProvider>
+    </AdminAuthProvider>
     </UserAuthProvider>
   );
 }
