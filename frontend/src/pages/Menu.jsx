@@ -64,13 +64,13 @@ const Menu = () => {
         {/* Editorial Hero Header */}
         <div className="text-center space-y-4 max-w-3xl mx-auto">
           <span className="font-sans text-xs uppercase tracking-[0.35em] text-caveno-gold font-light block">
-            Master Reserve Collection
+            SPECIALTY MENU
           </span>
           <h1 className="font-cinzel text-5xl sm:text-7xl text-caveno-cream font-medium tracking-wide">
-            The Craft Menu
+            Our Coffee & Bakery Collection
           </h1>
           <p className="font-sans text-sm md:text-base text-caveno-muted font-light leading-relaxed">
-            Every pour-over, ristretto, and pastry is meticulously prepared to celebrate single-origin harvests and artisanal French bakery traditions.
+            Every coffee, fresh drink, and pastry is handcrafted to bring you warmth, flavor, and a delightful café experience.
           </p>
         </div>
 

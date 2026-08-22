@@ -140,16 +140,16 @@ const HomeStory = () => {
         <div ref={textRef} className="lg:col-span-6 space-y-8 pl-0 lg:pl-6">
           <div className="space-y-3">
             <span className="font-sans text-xs uppercase tracking-[0.35em] text-caveno-gold font-light block">
-              Editorial Volume I
+              OUR STORY
             </span>
             <h2 className="font-cinzel text-4xl sm:text-5xl md:text-6xl text-caveno-cream leading-tight">
-              More than coffee. <br />
-              <span className="italic text-caveno-gold font-normal">It's a moment.</span>
+              Crafted With Passion. <br />
+              <span className="italic text-caveno-gold font-normal">Every Single Day.</span>
             </h2>
           </div>
 
           <p className="font-sans text-sm md:text-base text-caveno-muted font-light leading-relaxed max-w-lg">
-            CAVÉNO was conceived at the intersection of architectural minimalism and master roastery craft. We believe coffee is not merely a morning stimulant, but an immersive sensory narrative—an unhurried sanctuary carved from the noise of the metropolis.
+            We source the finest coffee beans from top farms around the world and roast them in small batches to bring you rich, smooth, and unforgettable flavors.
           </p>
 
           <div className="grid grid-cols-2 gap-6 pt-4 border-t border-white/10">

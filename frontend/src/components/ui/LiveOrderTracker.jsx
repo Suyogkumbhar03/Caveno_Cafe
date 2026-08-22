@@ -183,12 +183,12 @@ const LiveOrderTracker = () => {
                   <span className="text-caveno-muted block font-mono text-[10px]">STATUS</span>
                   <span className="font-cinzel text-sm text-caveno-gold font-semibold uppercase tracking-wider">
                     {order.orderStatus === 'Pending'
-                      ? '🟡 Queued for Barista'
+                      ? '🟡 Order Placed'
                       : order.orderStatus === 'Preparing'
-                      ? '🔵 Hand-Crafting Roast Flight'
+                      ? '🔵 Preparing Your Coffee'
                       : order.orderStatus === 'Ready'
-                      ? '🟢 Ready for Table Service'
-                      : '✅ Delivered to Salon Table'}
+                      ? '🟢 Order on the Way to Your Table'
+                      : '✅ Order Completed'}
                   </span>
                 </div>
 

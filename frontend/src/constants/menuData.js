@@ -1,9 +1,9 @@
 export const MENU_CATEGORIES = [
   'All',
   'Signature Roasts',
-  'Single Origin Pour-Over',
-  'Artisanal Pastries',
-  'Cold Extractions',
+  'Specialty Coffee',
+  'Fresh Bakery & Desserts',
+  'Cold Brews & Drinks',
 ];
 
 export const MENU_ITEMS = [

@@ -104,7 +104,7 @@ const HomeHero = ({ introFinished = true }) => {
         >
           <Sparkles size={13} className="text-caveno-gold animate-pulse" />
           <span className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.25em] text-caveno-gold font-light">
-            EST. 2026 • SANCTUARY ROASTERY
+            EST. 2026 • FRESHLY ROASTED COFFEE
           </span>
         </div>
 
@@ -122,9 +122,9 @@ const HomeHero = ({ introFinished = true }) => {
           <p className="overflow-hidden pt-3">
             <span
               ref={(el) => (titleWordsRef.current[1] = el)}
-              className="font-sans font-extralight tracking-[0.3em] text-caveno-cream text-lg sm:text-2xl md:text-3xl uppercase inline-block"
+              className="font-sans font-extralight tracking-[0.25em] text-caveno-cream text-lg sm:text-2xl md:text-3xl uppercase inline-block"
             >
-              Sensory Coffee Atelier
+              Where Every Cup Tells a Story
             </span>
           </p>
         </div>
@@ -134,7 +134,7 @@ const HomeHero = ({ introFinished = true }) => {
           ref={subtitleRef}
           className="max-w-2xl mx-auto font-sans font-light text-caveno-cream/90 text-sm sm:text-base leading-relaxed drop-shadow"
         >
-          Where rare Ethiopian micro-lots meet high-fashion architectural silence. An unhurried sanctuary designed for deep sensory exploration.
+          Discover handcrafted coffees, freshly baked pastries, and a warm, relaxing atmosphere designed for your everyday moments.
         </p>
 
         {/* CTA Buttons */}
@@ -147,7 +147,7 @@ const HomeHero = ({ introFinished = true }) => {
             data-cursor="MENU"
             className="w-full sm:w-auto px-8 py-4 rounded-full bg-caveno-gold text-caveno-black font-sans text-xs uppercase tracking-[0.2em] font-semibold hover:bg-caveno-amber transition duration-300 shadow-xl shadow-caveno-gold/20"
           >
-            Explore Menu Collection
+            Explore Menu
           </Link>
 
           <Link
@@ -155,7 +155,7 @@ const HomeHero = ({ introFinished = true }) => {
             data-cursor="RESERVE"
             className="w-full sm:w-auto px-8 py-4 rounded-full glass-pill border border-white/30 text-caveno-cream font-sans text-xs uppercase tracking-[0.2em] font-medium hover:border-caveno-gold/60 transition duration-300"
           >
-            Book Tasting Table
+            Reserve a Table
           </Link>
         </div>
       </div>

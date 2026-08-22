@@ -379,10 +379,10 @@ const Reservation = () => {
                     </div>
 
                     <div className="space-y-1.5">
-                      <label className="font-sans text-xs text-caveno-muted">Dietary Allergies / Preferences</label>
+                      <label className="font-sans text-xs text-caveno-muted">Special requests or food allergies</label>
                       <textarea
                         rows={2}
-                        placeholder="e.g. Dairy intolerance, vegan pâtisserie request..."
+                        placeholder="e.g. Quiet corner table, dairy allergy, birthday celebration..."
                         value={dietary}
                         onChange={(e) => setDietary(e.target.value)}
                         className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 font-sans text-xs text-caveno-cream focus:outline-none focus:border-caveno-gold/60 transition"
@@ -412,7 +412,7 @@ const Reservation = () => {
                   disabled={isSubmitting}
                   className="px-8 py-3.5 rounded-full bg-caveno-gold text-caveno-black font-sans text-xs uppercase tracking-widest font-semibold flex items-center justify-center gap-2 hover:bg-caveno-amber transition duration-300 shadow-xl shadow-caveno-gold/20 ml-auto"
                 >
-                  <span>{step === 3 ? (isSubmitting ? 'Confirming Pass...' : 'Confirm Reservation') : 'Continue'}</span>
+                  <span>{step === 3 ? (isSubmitting ? 'Confirming...' : 'Confirm Table Booking') : 'Continue'}</span>
                   <ArrowRight size={15} />
                 </button>
               </div>
