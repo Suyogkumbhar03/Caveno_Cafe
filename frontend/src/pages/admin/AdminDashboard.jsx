@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAdminAuth } from '../../context/AdminAuthContext';
 import MenuModal from '../../components/admin/MenuModal';
+import API_BASE_URL from '../../config/api';
 import {
   LayoutDashboard,
   CalendarCheck,
@@ -68,7 +69,7 @@ const AdminDashboard = () => {
   const fetchData = async () => {
     try {
       // 1. Fetch Stats
-      const statsRes = await fetch('http://localhost:5000/api/admin/stats', {
+      const statsRes = await fetch(`${API_BASE_URL}/admin/stats`, {
         headers: { Authorization: `Bearer ${adminToken}` },
       });
       if (statsRes.ok) {
@@ -82,7 +83,7 @@ const AdminDashboard = () => {
       if (resStatusFilter !== 'All') query.append('status', resStatusFilter);
       if (resSearch) query.append('search', resSearch);
 
-      const resRes = await fetch(`http://localhost:5000/api/admin/reservations?${query.toString()}`, {
+      const resRes = await fetch(`${API_BASE_URL}/admin/reservations?${query.toString()}`, {
         headers: { Authorization: `Bearer ${adminToken}` },
       });
       if (resRes.ok) {
@@ -91,10 +92,7 @@ const AdminDashboard = () => {
       }
 
       // 3. Fetch Orders
-      let orderRes = await fetch('/api/orders');
-      if (!orderRes.ok) {
-        orderRes = await fetch('http://localhost:5000/api/orders');
-      }
+      const orderRes = await fetch(`${API_BASE_URL}/orders`);
       if (orderRes.ok) {
         const orderJson = await orderRes.json();
         if (orderJson.success && orderJson.data) {
@@ -111,7 +109,7 @@ const AdminDashboard = () => {
       }
 
       // 4. Fetch Menu Items
-      const menuRes = await fetch('http://localhost:5000/api/menu');
+      const menuRes = await fetch(`${API_BASE_URL}/menu`);
       if (menuRes.ok) {
         const menuJson = await menuRes.json();
         if (menuJson.success) setMenuItems(menuJson.data);
@@ -130,7 +128,7 @@ const AdminDashboard = () => {
   // Update Reservation Status
   const handleUpdateResStatus = async (id, status) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/admin/reservations/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/admin/reservations/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -149,7 +147,7 @@ const AdminDashboard = () => {
   // Update Order Status (Pending -> Preparing -> Served)
   const handleUpdateOrderStatus = async (id, orderStatus) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/orders/${id}/status`, {
+      const response = await fetch(`${API_BASE_URL}/orders/${id}/status`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -168,7 +166,7 @@ const AdminDashboard = () => {
   const handleDeleteMenuItem = async (id) => {
     if (!window.confirm('Delete this menu item from Master Reserve collection?')) return;
     try {
-      const response = await fetch(`http://localhost:5000/api/menu/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/menu/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${adminToken}` },
       });
