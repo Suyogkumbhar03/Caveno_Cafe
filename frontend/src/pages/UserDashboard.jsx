@@ -72,7 +72,7 @@ const UserDashboard = () => {
             <div className="flex items-center gap-2">
               <Sparkles size={16} className="text-caveno-gold" />
               <span className="font-mono text-xs text-caveno-gold uppercase tracking-widest font-medium">
-                CAVÉNO CONNOISSEUR CLUB
+                CAVÉNO CONNOISSEUR EXPERIENCE
               </span>
             </div>
             <h1 className="font-cinzel text-3xl md:text-4xl text-caveno-cream font-medium">

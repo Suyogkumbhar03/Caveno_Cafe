@@ -56,7 +56,7 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
             <div className="flex items-center gap-2">
               <Sparkles size={18} className="text-caveno-gold" />
               <span className="font-mono text-[10px] uppercase tracking-widest text-caveno-gold">
-                CAVÉNO CONNOISSEUR CLUB
+                CAVÉNO CONNOISSEUR EXPERIENCE
               </span>
             </div>
             <button
@@ -95,7 +95,7 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
                   : 'border-transparent text-caveno-muted hover:text-caveno-cream'
               }`}
             >
-              Join Club
+              Create Account
             </button>
           </div>
 

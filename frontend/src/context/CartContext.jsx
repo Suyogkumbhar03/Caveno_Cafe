@@ -5,8 +5,10 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(() => {
     try {
-      const local = localStorage.getItem('caveno_cart');
-      return local ? JSON.parse(local) : [];
+      // Clear legacy localStorage cart if present
+      localStorage.removeItem('caveno_cart');
+      const session = sessionStorage.getItem('caveno_cart');
+      return session ? JSON.parse(session) : [];
     } catch {
       return [];
     }
@@ -17,7 +19,7 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     try {
-      localStorage.setItem('caveno_cart', JSON.stringify(cartItems));
+      sessionStorage.setItem('caveno_cart', JSON.stringify(cartItems));
     } catch (e) {
       console.error(e);
     }
