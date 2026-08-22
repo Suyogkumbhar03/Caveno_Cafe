@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check } from 'lucide-react';
+import API_BASE_URL from '../../config/api';
 
 const categories = ['Signature Roasts', 'Single Origin Pour-Over', 'Artisanal Pastries', 'Cold Extractions'];
 
@@ -63,8 +64,8 @@ const MenuModal = ({ isOpen, onClose, item, onSave, token }) => {
     };
 
     const url = item
-      ? `http://localhost:5000/api/menu/${item._id}`
-      : 'http://localhost:5000/api/menu';
+      ? `${API_BASE_URL}/menu/${item._id}`
+      : `${API_BASE_URL}/menu`;
     const method = item ? 'PUT' : 'POST';
 
     try {

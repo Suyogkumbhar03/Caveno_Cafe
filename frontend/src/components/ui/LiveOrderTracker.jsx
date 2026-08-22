@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Coffee, CheckCircle2, Clock, Flame, Utensils, RefreshCw, ShoppingBag, ChevronRight } from 'lucide-react';
 import { useUserAuth } from '../../context/UserAuthContext';
+import API_BASE_URL from '../../config/api';
 
 const LiveOrderTracker = () => {
   const { user } = useUserAuth();
@@ -14,10 +15,7 @@ const LiveOrderTracker = () => {
       const email = user?.email || localStorage.getItem('caveno_customer_email') || 'guest@domain.com';
       const encodedEmail = encodeURIComponent(email);
 
-      let response = await fetch(`/api/orders/user/${encodedEmail}`);
-      if (!response.ok) {
-        response = await fetch(`http://localhost:5000/api/orders/user/${encodedEmail}`);
-      }
+      let response = await fetch(`${API_BASE_URL}/orders/user/${encodedEmail}`);
 
       if (response.ok) {
         const json = await response.json();

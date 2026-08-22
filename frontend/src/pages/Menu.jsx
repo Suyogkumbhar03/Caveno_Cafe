@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { MENU_CATEGORIES, MENU_ITEMS as staticMenuItems } from '../constants/menuData';
 import ItemModal from '../components/ui/ItemModal';
 import { Search, LayoutGrid, LayoutList, Sparkles, Plus } from 'lucide-react';
+import API_BASE_URL from '../config/api';
 
 const Menu = () => {
   const [menuItems, setMenuItems] = useState(staticMenuItems);
@@ -17,7 +18,7 @@ const Menu = () => {
   useEffect(() => {
     const fetchMenu = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/menu');
+        const response = await fetch(`${API_BASE_URL}/menu`);
         if (response.ok) {
           const json = await response.json();
           if (json.success && json.data && json.data.length > 0) {

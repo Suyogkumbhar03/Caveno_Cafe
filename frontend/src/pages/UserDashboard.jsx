@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { useUserAuth } from '../context/UserAuthContext';
 import DigitalPassModal from '../components/ui/DigitalPassModal';
 import LiveOrderTracker from '../components/ui/LiveOrderTracker';
+import API_BASE_URL from '../config/api';
 import {
   Sparkles,
   Calendar,
@@ -28,7 +29,7 @@ const UserDashboard = () => {
     const fetchUserData = async () => {
       try {
         // Fetch User Reservations
-        const resRes = await fetch('http://localhost:5000/api/user/reservations', {
+        const resRes = await fetch(`${API_BASE_URL}/user/reservations`, {
           headers: { Authorization: `Bearer ${userToken}` },
         });
         if (resRes.ok) {
@@ -37,7 +38,7 @@ const UserDashboard = () => {
         }
 
         // Fetch User Orders
-        const orderRes = await fetch('http://localhost:5000/api/user/orders', {
+        const orderRes = await fetch(`${API_BASE_URL}/user/orders`, {
           headers: { Authorization: `Bearer ${userToken}` },
         });
         if (orderRes.ok) {

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, CreditCard, DollarSign, CheckCircle2, QrCode, ArrowRight, ShieldCheck, Sparkles, User, Mail, PlusCircle, LayoutDashboard } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { useUserAuth } from '../../context/UserAuthContext';
+import API_BASE_URL from '../../config/api';
 
 const CheckoutModal = ({ isOpen, onClose, onCheckoutSuccess }) => {
   const { cartItems, total, subtotal, tax, clearCart, setIsCartOpen } = useCart();
@@ -55,19 +56,11 @@ const CheckoutModal = ({ isOpen, onClose, onCheckoutSuccess }) => {
     let orderData = null;
 
     try {
-      let response = await fetch('/api/orders', {
+      let response = await fetch(`${API_BASE_URL}/orders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(orderPayload),
       });
-
-      if (!response.ok) {
-        response = await fetch('http://localhost:5000/api/orders', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(orderPayload),
-        });
-      }
 
       if (response.ok) {
         const json = await response.json();

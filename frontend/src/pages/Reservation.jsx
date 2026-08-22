@@ -5,6 +5,7 @@ import FloorPlanPicker from '../components/ui/FloorPlanPicker';
 import ReservationModal from '../components/ui/ReservationModal';
 import { ShieldCheck, Sparkles, ArrowRight, ArrowLeft, CheckCircle } from 'lucide-react';
 import { useUserAuth } from '../context/UserAuthContext';
+import API_BASE_URL from '../config/api';
 
 const partyOptions = ['1 Guest', '2 Guests', '3 Guests', '4 Guests', '5 Guests', '6+ Private Salon'];
 
@@ -75,7 +76,7 @@ const Reservation = () => {
       };
 
       try {
-        const response = await fetch('http://localhost:5000/api/reservations', {
+        const response = await fetch(`${API_BASE_URL}/reservations`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
