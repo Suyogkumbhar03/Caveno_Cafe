@@ -88,23 +88,20 @@ const Header = () => {
 
               {/* Profile Dropdown Menu */}
               {userDropdownOpen && (
-                <div className="absolute right-0 mt-3 w-52 bg-caveno-dark border border-white/10 rounded-2xl p-2 shadow-2xl space-y-1 z-50 text-xs font-sans">
+                <div className="absolute right-0 mt-3 w-56 bg-caveno-dark border border-white/10 rounded-2xl p-3 shadow-2xl space-y-1 z-50 text-xs font-sans">
+                  <div className="px-3 py-2 border-b border-white/10 mb-1">
+                    <span className="font-mono text-[10px] text-caveno-gold uppercase tracking-wider block">Customer Account</span>
+                    <span className="font-sans font-medium text-caveno-cream truncate block">{user?.name || 'Valued Guest'}</span>
+                    <span className="font-mono text-[10px] text-caveno-muted truncate block">{user?.email}</span>
+                  </div>
+
                   <Link
                     to="/dashboard"
                     onClick={() => setUserDropdownOpen(false)}
                     className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-caveno-cream hover:bg-white/5 transition"
                   >
                     <LayoutDashboard size={14} className="text-caveno-gold" />
-                    <span>My Dashboard</span>
-                  </Link>
-
-                  <Link
-                    to="/admin/login"
-                    onClick={() => setUserDropdownOpen(false)}
-                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-caveno-gold hover:bg-caveno-gold/10 transition border-t border-white/10"
-                  >
-                    <ShieldCheck size={14} />
-                    <span>Staff / Admin Portal</span>
+                    <span>My Dashboard & Orders</span>
                   </Link>
 
                   <button
@@ -112,7 +109,7 @@ const Header = () => {
                       setUserDropdownOpen(false);
                       logout();
                     }}
-                    className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-rose-300 hover:bg-rose-500/10 transition text-left"
+                    className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-rose-300 hover:bg-rose-500/10 transition text-left border-t border-white/10 mt-1 pt-2"
                   >
                     <LogOut size={14} />
                     <span>Sign Out</span>
@@ -134,7 +131,7 @@ const Header = () => {
                 className="hidden sm:flex items-center gap-1.5 text-[11px] font-mono text-caveno-muted hover:text-caveno-gold transition py-1 px-2.5 rounded-full border border-white/10 hover:border-caveno-gold/40"
               >
                 <ShieldCheck size={13} className="text-caveno-gold" />
-                <span>Staff</span>
+                <span>Staff Portal</span>
               </Link>
             </div>
           )}
@@ -178,14 +175,38 @@ const Header = () => {
                 {link.name}
               </Link>
             ))}
-            <Link
-              to="/admin/login"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-2 font-mono text-xs text-caveno-gold border-t border-white/10 pt-4"
-            >
-              <ShieldCheck size={16} />
-              <span>Staff Portal</span>
-            </Link>
+
+            {isAuthenticated ? (
+              <div className="border-t border-white/10 pt-4 space-y-3">
+                <Link
+                  to="/dashboard"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2 font-sans text-xs text-caveno-gold"
+                >
+                  <LayoutDashboard size={16} />
+                  <span>My Dashboard</span>
+                </Link>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    logout();
+                  }}
+                  className="flex items-center gap-2 font-sans text-xs text-rose-300"
+                >
+                  <LogOut size={16} />
+                  <span>Sign Out</span>
+                </button>
+              </div>
+            ) : (
+              <Link
+                to="/admin/login"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2 font-mono text-xs text-caveno-gold border-t border-white/10 pt-4"
+              >
+                <ShieldCheck size={16} />
+                <span>Staff Portal</span>
+              </Link>
+            )}
           </nav>
         </div>
       )}
